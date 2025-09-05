@@ -3,8 +3,7 @@ export async function explainExpression(expr, result) {
     return "Type something (e.g., (4+7), press =, then click Ask AI)";
   }
 
-  const key = "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";
-
+  const key = import.meta.env.VITE_OPENROUTER_API_KEY;
   if (!key) {
     return "Missing API key.";
   }
@@ -20,7 +19,7 @@ export async function explainExpression(expr, result) {
     `Explain simply, in steps, without extra symbols.`;
 
   const body = {
-    model: "google/gemini-flash-1.5",
+    model: "google/gemini-flash-1.5 " || "openai/gpt-3.5-turbo",
     messages: [
       {
         role: "system",
